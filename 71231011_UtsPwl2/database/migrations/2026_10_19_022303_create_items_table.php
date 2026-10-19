@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id();
+            $table->string('item_code', 50)->primary();
+            $table->string('item');
+            $table->decimal('unit_price', 12, 2);
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
             $table->timestamps();
         });
     }
